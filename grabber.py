@@ -10,6 +10,10 @@ class MyServer(BaseHTTPRequestHandler):
        self.send_response(302)
        self.send_header('Location', sys.argv[1])
        self.end_headers()
+    
+    def log_message(self, format, *args):
+       print("IP grabbed: "+self.headers["host"]+" (at "+self.path+")")
+
 
 if __name__ == "__main__":        
     webServer = HTTPServer((hostName, serverPort), MyServer)
