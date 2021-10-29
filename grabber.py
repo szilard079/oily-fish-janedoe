@@ -1,18 +1,15 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
+import sys
 
 hostName = "localhost"
 serverPort = 8050
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(bytes("<html><head><title>Project Oily Fish JaneDoe</title></head>", "utf-8"))
-        self.wfile.write(bytes("<body>", "utf-8"))
-        self.wfile.write(bytes("<p>To be filled</p>", "utf-8"))
-        self.wfile.write(bytes("</body></html>", "utf-8"))
+       self.send_response(302)
+       self.send_header('Location', sys.argv[1])
+       self.end_headers()
 
 if __name__ == "__main__":        
     webServer = HTTPServer((hostName, serverPort), MyServer)
